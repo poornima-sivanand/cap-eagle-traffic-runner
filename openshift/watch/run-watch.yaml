@@ -38,8 +38,7 @@ objects:
             command:
               - watch
               - '-d'
-              - curl
-              - '-vsSL ${API_ENDPOINT} -o /dev/null 2>&1'
+              - 'for url in $(echo ${API_URL} | tr "," "\n"); do curl -vsSL ${API_BASE}/${url} -o /dev/null 2>&1; done;'
             image: ${OS_IMAGE}:${OS_TAG}
             imagePullPolicy: Always
             name: ${NAME}
@@ -78,8 +77,13 @@ parameters:
   description: The source tag of the os image.
   value: 7.5-433
   required: true
-- name: API_ENDPOINT
+- name: API_BASE
   displayName: API Endpoint
   description: The api endpoint to test.
   value: url
+  required: true
+- name: API_URL
+  displayName: API URL
+  description: The api endpoint to test.
+  value: a;b;c
   required: true

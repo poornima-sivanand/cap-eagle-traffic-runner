@@ -2,4 +2,5 @@ NAME=cap-clement-kamloops-run-watch
 GROUP_NAME=cap-clement-kamloops-epic
 OS_IMAGE=registry.access.redhat.com/rhel7/rhel
 OS_TAG=7.5-433
-API_ENDPOINT=https://cap-clement-kamloops-dev.pathfinder.gov.bc.ca/api/project
+API_BASE=https://cap-clement-kamloops-dev.pathfinder.gov.bc.ca/api
+API_URL=project,project,project,project,project,project,project,project,project,project
