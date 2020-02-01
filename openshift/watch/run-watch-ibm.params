@@ -1,0 +1,5 @@
+NAME=cap-clement-ibm-run-watch
+GROUP_NAME=cap-clement-ibm-epic
+OS_IMAGE=registry.access.redhat.com/rhel7/rhel
+OS_TAG=7.5-433
+API_ENDPOINT=https://cap-clement-ibm-admin-oabrei-dev.clouddiscovery-01dea2606d71f7a3540418b505a890bc-0002.mon01.containers.appdomain.cloud/api/project

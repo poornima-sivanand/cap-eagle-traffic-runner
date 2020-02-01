@@ -1,0 +1,6 @@
+NAME=cap-clement-kamloops-run-load
+GROUP_NAME=cap-clement-kamloops-epic
+API_ENDPOINT=https://cap-clement-kamloops-dev.pathfinder.gov.bc.ca/api/project
+OPENSHIFT_REGISTRY=docker-registry.default.svc:5000
+PROJECT_NAMESPACE=oabrei-dev
+IS_TAG=latest

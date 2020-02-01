@@ -1,0 +1,123 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: ${NAME}
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    name: ${NAME}
+    annotations:
+      description: Keeps track of changes in the application runtime image
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    name: ${NAME}
+    annotations:
+      description: Define container build
+  spec:
+    source:
+      dockerfile: |-
+        FROM node:13.7.0
+        RUN npm i -g loadtest
+    strategy:
+      dockerStrategy:
+        from:
+          kind: DockerImage
+          name: node:13.7.0
+    output:
+      to:
+        kind: ImageStreamTag
+        name: ${NAME}:${IS_TAG}
+    triggers:
+      - type: ImageChange
+      - type: ConfigChange
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      description: Defines how to deploy the test
+    generation: 1
+    labels:
+      app: ${GROUP_NAME}
+    name: ${NAME}
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      app: ${GROUP_NAME}
+      deploymentconfig: ${NAME}
+    strategy:
+        activeDeadlineSeconds: 21600
+        recreateParams:
+          timeoutSeconds: 600
+        resources: {}
+        type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ${GROUP_NAME}
+          deploymentconfig: ${NAME}
+      spec:
+        containers:
+          - command: ['loadtest', '--concurrency', '10', '--rps', '200', '${API_ENDPOINT}']
+            image: ${OPENSHIFT_REGISTRY}/${PROJECT_NAMESPACE}/${NAME}:${IS_TAG}
+            imagePullPolicy: Always
+            name: ${NAME}
+            resources:
+              limits:
+                cpu: 150m
+                memory: 256Mi
+              requests:
+                cpu: 50m
+                memory: 128Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+        - imageChangeParams:
+            automatic: true
+            containerNames:
+              - ${NAME}
+            from:
+              kind: ImageStreamTag
+              name: '${NAME}:${IS_TAG}'
+              namespace: ${PROJECT_NAMESPACE}
+          type: ImageChange
+        - type: ConfigChange
+parameters:
+- name: NAME
+  displayName: Name to apply to objects in the template
+  value: eagle-test-load-run
+  required: true
+- name: GROUP_NAME
+  displayName: Group Name
+  description: The name to group all of the frontend objects defined in this template.
+  value: eagle-test-load
+  required: true
+- name: API_ENDPOINT
+  displayName: API Endpoint
+  description: The api endpoint to test.
+  value: url
+  required: true
+- name: OPENSHIFT_REGISTRY
+  displayName: API Endpoint
+  description: The api endpoint to test.
+  value: docker-registry.default.svc:5000
+  required: true
+- name: PROJECT_NAMESPACE
+  displayName: API Endpoint
+  description: The api endpoint to test.
+  value: oabrei-dev
+  required: true
+- name: IS_TAG
+  displayName: ImageStream tag
+  description: The api endpoint to test.
+  value: latest
+  required: true

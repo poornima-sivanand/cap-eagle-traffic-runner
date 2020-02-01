@@ -1,0 +1,6 @@
+NAME=cap-clement-ibm-run-load
+GROUP_NAME=cap-clement-ibm-epic
+API_ENDPOINT=https://cap-clement-ibm-admin-oabrei-dev.clouddiscovery-01dea2606d71f7a3540418b505a890bc-0002.mon01.containers.appdomain.cloud/api/project
+OPENSHIFT_REGISTRY=docker-registry.default.svc:5000
+PROJECT_NAMESPACE=oabrei-dev
+IS_TAG=latest
