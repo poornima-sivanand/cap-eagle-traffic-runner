@@ -18,7 +18,7 @@ if echo "$THROWAWAY_PW" | grep 'something_unique'; then
 fi
 
 oc project ${OPENSHIFT_NAMESPACE};
-oc run cap-traffic-runner --image=docker-registry.default.svc:5000/openshift/mongodb --env="MONGODB_ADMIN_PASSWORD=${THROWAWAY_PW}" -n ${OPENSHIFT_NAMESPACE};
+#oc run cap-traffic-runner --image=cap-traffic-runner -n ${OPENSHIFT_NAMESPACE};
 oc describe dc/cap-traffic-runner;
 CAP_TRAFFIC_RUNNER_TARGET__IBM_MAIN_PAGE="https://cap-ibm-dev.clouddiscovery-01dea2606d71f7a3540418b505a890bc-0002.mon01.containers.appdomain.cloud";
 CAP_TRAFFIC_RUNNER_TARGET__IBM_RECENT_ACTIVITIES="https://cap-ibm-dev.clouddiscovery-01dea2606d71f7a3540418b505a890bc-0002.mon01.containers.appdomain.cloud/news;currentPage=1;pageSize=10;sortBy=-dateAdded;ms=1581288481967";
