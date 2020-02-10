@@ -1,8 +1,8 @@
 OPENSHIFT_NAMESPACE=your_namespace;
 THROWAWAY_PW="something_unique";
 
-local output=$(oc whoami 2>&1)
-if echo "$output" | grep 'You must be logged in to the server'; then
+token_check=$(oc whoami 2>&1)
+if echo "$token_check" | grep 'You must be logged in to the server'; then
     echo -e \\n"Not connected to OpenShift.\nIn your OpenShift Web Console, upper right corner, click on the down arrow next to user name. From the menu, select 'Copy Login Command'.\nPaste the buffer contents into this terminal and hit [ENTER]."\\n
     exit 1
 fi
