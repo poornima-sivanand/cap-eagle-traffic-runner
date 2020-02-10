@@ -1,5 +1,4 @@
 OPENSHIFT_NAMESPACE=your_namespace;
-THROWAWAY_PW="something_unique";
 
 token_check=$(oc whoami 2>&1)
 if echo "$token_check" | grep 'You must be logged in to the server'; then
@@ -12,13 +11,8 @@ if echo "$OPENSHIFT_NAMESPACE" | grep 'your_namespace'; then
     exit 1
 fi
 
-if echo "$THROWAWAY_PW" | grep 'something_unique'; then
-    echo -e \\n"THROWAWAY_PW is required.\nSet the value to something random and unique.\nEven though we're not using it, we don't want to leave a vulnerability open."\\n
-    exit 1
-fi
-
 oc project ${OPENSHIFT_NAMESPACE};
-#oc run cap-traffic-runner --image=cap-traffic-runner -n ${OPENSHIFT_NAMESPACE};
+
 oc describe dc/cap-traffic-runner;
 CAP_TRAFFIC_RUNNER_TARGET__IBM_MAIN_PAGE="https://cap-ibm-dev.clouddiscovery-01dea2606d71f7a3540418b505a890bc-0002.mon01.containers.appdomain.cloud";
 CAP_TRAFFIC_RUNNER_TARGET__IBM_RECENT_ACTIVITIES="https://cap-ibm-dev.clouddiscovery-01dea2606d71f7a3540418b505a890bc-0002.mon01.containers.appdomain.cloud/news;currentPage=1;pageSize=10;sortBy=-dateAdded;ms=1581288481967";
