@@ -1,3 +1,4 @@
+# set the namespace then run this locally
 OPENSHIFT_NAMESPACE=your_namespace;
 
 token_check=$(oc whoami 2>&1)
