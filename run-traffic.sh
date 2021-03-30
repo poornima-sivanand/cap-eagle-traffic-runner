@@ -1,7 +1,8 @@
+
 #!/bin/bash
 # copy paste this into the terminal once the setup is done
 bash;
-for id in 1 2 3 4 5 6 7 8 9 10
+for id in 1 2 3 
 do
     eval "eval target_location=\$\{URL${id}\}";
     if [[ '' != ${target_location} ]]; then

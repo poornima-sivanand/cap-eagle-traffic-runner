@@ -5,10 +5,16 @@ RUN apk update && \
 
 RUN apk --no-cache add --update bash ca-certificates openssl wget && update-ca-certificates
 
+
+
 RUN mkdir -p /runner
 WORKDIR /runner/
+
+COPY  ../../run-traffic.sh .
 
 RUN chown -R 1001:0 /runner && \
     chmod -R ug+rwx /runner
 
 USER 1001
+
+ENTRYPOINT [ "sh", "./run-traffic.sh" ]

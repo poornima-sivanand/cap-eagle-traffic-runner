@@ -1,5 +1,5 @@
 # set the namespace then run this locally
-OPENSHIFT_NAMESPACE=your_namespace;
+OPENSHIFT_NAMESPACE=32d13a-dev;
 
 token_check=$(oc whoami 2>&1)
 if echo "$token_check" | grep 'You must be logged in to the server'; then
@@ -15,28 +15,15 @@ fi
 oc project ${OPENSHIFT_NAMESPACE};
 
 oc describe dc/cap-traffic-runner;
-CAP_TRAFFIC_RUNNER_TARGET__MAIN_PAGE="https://cap-bcgov-azure-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca";
-CAP_TRAFFIC_RUNNER_TARGET__RECENT_ACTIVITIES="https://cap-bcgov-azure-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/news;currentPage=1;pageSize=10;sortBy=-dateAdded;ms=1581288481967";
-CAP_TRAFFIC_RUNNER_TARGET__RECENT_ACTIVITIES_PAGE_2="https://cap-bcgov-azure-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/news;currentPage=2;pageSize=10;sortBy=-dateAdded;ms=1581288517208";
-CAP_TRAFFIC_RUNNER_TARGET__MAPS_SEARCH="https://cap-bcgov-azure-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/projects";
-CAP_TRAFFIC_RUNNER_TARGET__MAPS_SEARCH_SCHOEN="https://cap-bcgov-azure-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/projects?applicant=SCHOEN%20-%20BLOCK%20QUARRY";
-CAP_TRAFFIC_RUNNER_TARGET__ALL_PROJECT_LIST="https://cap-bcgov-azure-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/projects-list;currentPage=1;pageSize=10;sortBy=-datePosted;ms=1581288359648";
-CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN="https://cap-bcgov-azure-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/p/436a1eee7d7ec466d7c5a95f/documents;currentPage=1;pageSize=10;sortBy=-datePosted;ms=1581287971811";
-CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_SMALL="https://cap-bcgov-azure-api-minio-tnhlex-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/uploads/436a1eee7d7ec466d7c5a95f/8af9c55969218a0eba1faf16fa2dbddc.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=PSSACovG%2F20200225%2F%2Fs3%2Faws4_request&X-Amz-Date=20200225T190248Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1c6388908b3cf7c9c5aabe547b8d39c7376cf8df9f5977c0194dadd4d2ecc0fb";
-CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_MEDIUM="https://cap-bcgov-azure-api-minio-tnhlex-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/uploads/436a1eee7d7ec466d7c5a95f/30fcfbb41bebdfc6f4a909c1e5c3dfaf.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=PSSACovG%2F20200225%2F%2Fs3%2Faws4_request&X-Amz-Date=20200225T190311Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=223aa7145fec8745d22c0b1ec6ed7d3e2380f8244ed3728843fbd577ca60a235";
-CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_LARGE="https://cap-bcgov-azure-api-minio-tnhlex-dev.apps.ocp4lab.clearwater.devops.gov.bc.ca/uploads/436a1eee7d7ec466d7c5a95f/fb0f9e6ac02e8d0a9552ddf2231175c6.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=PSSACovG%2F20200225%2F%2Fs3%2Faws4_request&X-Amz-Date=20200225T190334Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a41d0bea3ca1665293b062c807880d704d20a703e53a52f0744e0ade289c00bc";
+
+CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_SMALL="http://EC2Co-EcsEl-M1RRTZI6Q6XK-1396285135.ca-central-1.elb.amazonaws.com:8080/small";
+CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_MEDIUM="http://EC2Co-EcsEl-M1RRTZI6Q6XK-1396285135.ca-central-1.elb.amazonaws.com:8080/medium";
+CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_LARGE="http://EC2Co-EcsEl-M1RRTZI6Q6XK-1396285135.ca-central-1.elb.amazonaws.com:8080/small";
 
 oc set env dc/cap-traffic-runner --overwrite \
-URL1=${CAP_TRAFFIC_RUNNER_TARGET__MAIN_PAGE} \
-URL2=${CAP_TRAFFIC_RUNNER_TARGET__RECENT_ACTIVITIES} \
-URL3=${CAP_TRAFFIC_RUNNER_TARGET__RECENT_ACTIVITIES_PAGE_2} \
-URL4=${CAP_TRAFFIC_RUNNER_TARGET__MAPS_SEARCH} \
-URL5=${CAP_TRAFFIC_RUNNER_TARGET__MAPS_SEARCH_SCHOEN} \
-URL6=${CAP_TRAFFIC_RUNNER_TARGET__ALL_PROJECT_LIST} \
-URL7=${CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN} \
-URL8=${CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_SMALL} \
-URL9=${CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_MEDIUM} \
-URL10=${CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_LARGE};
+URL1=${CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_SMALL} \
+URL2=${CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_MEDIUM} \
+URL3=${CAP_TRAFFIC_RUNNER_TARGET__PROJECT_SCHOEN_DOC_LARGE};
 
 # oc describe dc/cap-traffic-runner;
 # CAP_TRAFFIC_RUNNER_TARGET__IBM_MAIN_PAGE="https://cap-ibm-dev.clouddiscovery-01dea2606d71f7a3540418b505a890bc-0002.mon01.containers.appdomain.cloud";
