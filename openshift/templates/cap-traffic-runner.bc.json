@@ -115,7 +115,7 @@
       "displayName": "Git Repo URL",
       "description": "The URL to the Git repository.",
       "required": true,
-      "value": "https://github.com/bcgov/cap-eagle-traffic-runner.git"
+      "value": "https://github.com/poornima-sivanand/cap-eagle-traffic-runner.git"
     },
     {
       "name": "VERSION",

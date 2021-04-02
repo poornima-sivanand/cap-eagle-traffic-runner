@@ -1,5 +1,5 @@
 # set the namespace then run this locally
-OPENSHIFT_NAMESPACE=32d13a-dev;
+OPENSHIFT_NAMESPACE=32d13a-test;
 
 token_check=$(oc whoami 2>&1)
 if echo "$token_check" | grep 'You must be logged in to the server'; then
