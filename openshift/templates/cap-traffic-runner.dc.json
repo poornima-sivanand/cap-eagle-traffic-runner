@@ -139,7 +139,7 @@
       "name": "TOOLSNAMESPACE",
       "displayName": "Tools Namespace",
       "description": "The OpenShift project namespace containing the builds and images",
-      "value": "your-tools-namespace",
+      "value": "32d13a-test",
       "required": true
     }
   ]
