@@ -17,5 +17,3 @@ RUN chown -R 1001:0 /runner && \
     chmod 777 /runner/run-traffic.sh
 
 USER 1001
-
-ENTRYPOINT [ "sh", "/runner/run-traffic.sh", ">/dev/tty" ]
