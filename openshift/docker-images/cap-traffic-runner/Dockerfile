@@ -18,4 +18,4 @@ RUN chown -R 1001:0 /runner && \
 
 USER 1001
 
-ENTRYPOINT [ "sh", "/runner/run-traffic.sh" ]
+ENTRYPOINT [ "sh", "/runner/run-traffic.sh", ">/dev/tty" ]
