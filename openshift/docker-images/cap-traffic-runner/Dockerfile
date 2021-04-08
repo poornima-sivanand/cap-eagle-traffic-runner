@@ -13,7 +13,9 @@ WORKDIR /runner/
 COPY  ./run-traffic.sh .
 
 RUN chown -R 1001:0 /runner && \
-    chmod -R ug+rwx /runner
+    chmod -R ug+rwx /runner && \
+    chmod 777 /runner/run-traffic.sh
 
 USER 1001
 
+ENTRYPOINT [ "sh", "/runner/run-traffic.sh" ]
