@@ -68,7 +68,7 @@
       },
       "spec": {
         "source": {
-          "type": "Git",
+          "type": "",
           "git": {
             "uri": "${SOURCE_REPOSITORY_URL}",
             "ref": "${GIT_REF}"
