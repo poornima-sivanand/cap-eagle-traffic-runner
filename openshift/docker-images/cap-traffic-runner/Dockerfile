@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM image-registry.apps.silver.devops.gov.bc.ca/32d13a-dev/openjdk
 
 RUN apk update && \
     apk upgrade
