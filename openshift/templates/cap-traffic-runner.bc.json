@@ -18,7 +18,7 @@
       },
       "spec": {
         "lookupPolicy": {
-          "local": true
+          "local": false
         },
         "tags": [
           {
@@ -79,7 +79,7 @@
           "type": "Docker",
           "dockerStrategy": {
             "from": {
-              "kind": "ImageStreamTag",
+              "kind": "DockerImage",
               "name": "docker.io/openjdk:8-jdk-alpine"
             }
           }
