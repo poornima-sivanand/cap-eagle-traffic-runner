@@ -1,7 +1,5 @@
 #!/bin/bash
-# copy paste this into the terminal once the setup is done
-
-bash;
+# copy paste this into the terminal once the setup is dones
 for id in 1 2 3 
 do
     eval "eval target_location=\$\{URL${id}\}";
